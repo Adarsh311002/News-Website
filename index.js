@@ -1,5 +1,4 @@
-
-const url = "https://newsapi.org/v2/everything?q=";
+const url = "/api/news?q=";
 
 window.addEventListener("load", () => fetchNews("mind"));
 
@@ -8,17 +7,9 @@ function reload() {
 }
 
 async function fetchNews(query) {
-  try {
-    const res = await fetch(`${url}${query}`, {
-      headers: { 'X-Api-Key': "dad60b00f3344244b33f95be34d3dd56" }
-    });
-    if (!res.ok) throw new Error('Failed to fetch news');
-    const data = await res.json();
-    bindData(data.articles);
-  } catch (error) {
-    console.error('Error:', error);
-    // Show error message to users
-  }
+  const res = await fetch(`${url}${query}`);
+  const data = await res.json();
+  bindData(data.articles);
 }
 
 function bindData(articles) {
